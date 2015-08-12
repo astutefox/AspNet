@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AspNetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="pomdept2">
+          <Key>
+            <PropertyRef Name="dept_no" />
+          </Key>
+          <Property Name="dept_no" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="dept_nm" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="creator" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="createdate" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="upduser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="upddate" Type="varchar" MaxLength="14" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pomflow1">
+          <Key>
+            <PropertyRef Name="flow_no" />
+          </Key>
+          <Property Name="flow_no" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="flow_typ" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="bill_no" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="creator" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="createdate" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="upduser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="upddate" Type="varchar" MaxLength="14" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pomflow2">
+          <Key>
+            <PropertyRef Name="flow_no" />
+            <PropertyRef Name="flow_seq" />
+          </Key>
+          <Property Name="flow_no" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="flow_seq" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="dept_no" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="emp_no" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="f_status" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="creator" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="createdate" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="upduser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="upddate" Type="varchar" MaxLength="14" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pompersn1">
+          <Key>
+            <PropertyRef Name="emp_no" />
+          </Key>
+          <Property Name="emp_no" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="emp_nm" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="dept_no" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="posi_no" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="creator" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="createdate" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="upduser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="upddate" Type="varchar" MaxLength="14" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_pomflow2_To_pomflow1">
+          <End Role="pomflow1" Type="Self.pomflow1" Multiplicity="1" />
+          <End Role="pomflow2" Type="Self.pomflow2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pomflow1">
+              <PropertyRef Name="flow_no" />
+            </Principal>
+            <Dependent Role="pomflow2">
+              <PropertyRef Name="flow_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pompersn1_To_pomdept2">
+          <End Role="pomdept2" Type="Self.pomdept2" Multiplicity="1" />
+          <End Role="pompersn1" Type="Self.pompersn1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pomdept2">
+              <PropertyRef Name="dept_no" />
+            </Principal>
+            <Dependent Role="pompersn1">
+              <PropertyRef Name="dept_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AspNetModelStoreContainer">
+          <EntitySet Name="pomdept2" EntityType="Self.pomdept2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pomflow1" EntityType="Self.pomflow1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pomflow2" EntityType="Self.pomflow2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pompersn1" EntityType="Self.pompersn1" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_pomflow2_To_pomflow1" Association="Self.FK_pomflow2_To_pomflow1">
+            <End Role="pomflow1" EntitySet="pomflow1" />
+            <End Role="pomflow2" EntitySet="pomflow2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pompersn1_To_pomdept2" Association="Self.FK_pompersn1_To_pomdept2">
+            <End Role="pomdept2" EntitySet="pomdept2" />
+            <End Role="pompersn1" EntitySet="pompersn1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AspNetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="pomdept2">
+          <Key>
+            <PropertyRef Name="dept_no" />
+          </Key>
+          <Property Name="dept_no" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dept_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="creator" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdate" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upduser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upddate" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pompersn1" Relationship="AspNetModel.FK_pompersn1_To_pomdept2" FromRole="pomdept2" ToRole="pompersn1" />
+        </EntityType>
+        <EntityType Name="pomflow1">
+          <Key>
+            <PropertyRef Name="flow_no" />
+          </Key>
+          <Property Name="flow_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="flow_typ" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bill_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="creator" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdate" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upduser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upddate" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pomflow2" Relationship="AspNetModel.FK_pomflow2_To_pomflow1" FromRole="pomflow1" ToRole="pomflow2" />
+        </EntityType>
+        <EntityType Name="pomflow2">
+          <Key>
+            <PropertyRef Name="flow_no" />
+            <PropertyRef Name="flow_seq" />
+          </Key>
+          <Property Name="flow_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="flow_seq" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dept_no" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emp_no" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="f_status" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="creator" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdate" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upduser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upddate" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pomflow1" Relationship="AspNetModel.FK_pomflow2_To_pomflow1" FromRole="pomflow2" ToRole="pomflow1" />
+        </EntityType>
+        <EntityType Name="pompersn1">
+          <Key>
+            <PropertyRef Name="emp_no" />
+          </Key>
+          <Property Name="emp_no" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emp_nm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dept_no" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="posi_no" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="creator" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdate" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upduser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="upddate" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pomdept2" Relationship="AspNetModel.FK_pompersn1_To_pomdept2" FromRole="pompersn1" ToRole="pomdept2" />
+        </EntityType>
+        <EntityContainer Name="AspNetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="pomdept2" EntityType="Self.pomdept2" />
+          <EntitySet Name="pomflow1" EntityType="Self.pomflow1" />
+          <EntitySet Name="pomflow2" EntityType="Self.pomflow2" />
+          <EntitySet Name="pompersn1" EntityType="Self.pompersn1" />
+          <AssociationSet Name="FK_pompersn1_To_pomdept2" Association="AspNetModel.FK_pompersn1_To_pomdept2">
+            <End Role="pomdept2" EntitySet="pomdept2" />
+            <End Role="pompersn1" EntitySet="pompersn1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pomflow2_To_pomflow1" Association="AspNetModel.FK_pomflow2_To_pomflow1">
+            <End Role="pomflow1" EntitySet="pomflow1" />
+            <End Role="pomflow2" EntitySet="pomflow2" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_pompersn1_To_pomdept2">
+          <End Type="AspNetModel.pomdept2" Role="pomdept2" Multiplicity="1" />
+          <End Type="AspNetModel.pompersn1" Role="pompersn1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pomdept2">
+              <PropertyRef Name="dept_no" />
+            </Principal>
+            <Dependent Role="pompersn1">
+              <PropertyRef Name="dept_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pomflow2_To_pomflow1">
+          <End Type="AspNetModel.pomflow1" Role="pomflow1" Multiplicity="1" />
+          <End Type="AspNetModel.pomflow2" Role="pomflow2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pomflow1">
+              <PropertyRef Name="flow_no" />
+            </Principal>
+            <Dependent Role="pomflow2">
+              <PropertyRef Name="flow_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AspNetModelStoreContainer" CdmEntityContainer="AspNetEntities">
+          <EntitySetMapping Name="pomdept2">
+            <EntityTypeMapping TypeName="AspNetModel.pomdept2">
+              <MappingFragment StoreEntitySet="pomdept2">
+                <ScalarProperty Name="dept_no" ColumnName="dept_no" />
+                <ScalarProperty Name="dept_nm" ColumnName="dept_nm" />
+                <ScalarProperty Name="creator" ColumnName="creator" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="upduser" ColumnName="upduser" />
+                <ScalarProperty Name="upddate" ColumnName="upddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pomflow1">
+            <EntityTypeMapping TypeName="AspNetModel.pomflow1">
+              <MappingFragment StoreEntitySet="pomflow1">
+                <ScalarProperty Name="flow_no" ColumnName="flow_no" />
+                <ScalarProperty Name="flow_typ" ColumnName="flow_typ" />
+                <ScalarProperty Name="bill_no" ColumnName="bill_no" />
+                <ScalarProperty Name="creator" ColumnName="creator" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="upduser" ColumnName="upduser" />
+                <ScalarProperty Name="upddate" ColumnName="upddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pomflow2">
+            <EntityTypeMapping TypeName="AspNetModel.pomflow2">
+              <MappingFragment StoreEntitySet="pomflow2">
+                <ScalarProperty Name="flow_no" ColumnName="flow_no" />
+                <ScalarProperty Name="flow_seq" ColumnName="flow_seq" />
+                <ScalarProperty Name="dept_no" ColumnName="dept_no" />
+                <ScalarProperty Name="emp_no" ColumnName="emp_no" />
+                <ScalarProperty Name="f_status" ColumnName="f_status" />
+                <ScalarProperty Name="creator" ColumnName="creator" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="upduser" ColumnName="upduser" />
+                <ScalarProperty Name="upddate" ColumnName="upddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pompersn1">
+            <EntityTypeMapping TypeName="AspNetModel.pompersn1">
+              <MappingFragment StoreEntitySet="pompersn1">
+                <ScalarProperty Name="emp_no" ColumnName="emp_no" />
+                <ScalarProperty Name="emp_nm" ColumnName="emp_nm" />
+                <ScalarProperty Name="dept_no" ColumnName="dept_no" />
+                <ScalarProperty Name="posi_no" ColumnName="posi_no" />
+                <ScalarProperty Name="creator" ColumnName="creator" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="upduser" ColumnName="upduser" />
+                <ScalarProperty Name="upddate" ColumnName="upddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
